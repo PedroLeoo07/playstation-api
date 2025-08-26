@@ -1,7 +1,7 @@
 "use client";
 
 import styles from './Api.module.css';
-import { useRouter } from 'next/navigation'; // Corrigido para 'next/navigation'
+import { useRouter } from 'next/navigation'; 
 
 export default function Api() {
   const router = useRouter();
