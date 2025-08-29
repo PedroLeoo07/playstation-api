@@ -5,8 +5,8 @@ import Image from "next/image";
 
 export default function Home() {
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-blue-900 to-blue-700 px-8">
-            <div className="bg-white shadow-2xl rounded-3xl p-16 w-[50rem] transform transition duration-500 mt-16 mx-8">
+        <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-blue-900 to-blue-700 px-12">
+            <div className="bg-white shadow-2xl rounded-3xl p-16 w-[50rem] transform transition duration-500 mt-16 mx-12">
                 {/* Dados do perfil */}
                 <div className="flex flex-col items-center">
                     {/* Nome da turma */}
@@ -148,11 +148,6 @@ export default function Home() {
                             </a>
                         </li>
                     </ul>
-                </div>
-                <div className="mt-8">
-                    <button className="w-full bg-blue-500 text-white py-2 px-4 rounded-md shadow-lg hover:bg-blue-700 transition duration-300">
-                        Editar Perfil
-                    </button>
                 </div>
                 <div className="mt-6">
                     <a

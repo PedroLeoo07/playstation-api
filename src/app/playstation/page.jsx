@@ -63,8 +63,43 @@ export default function page() {
                 boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
               }}
             >
-              <h2 style={{ fontSize: "1.25rem", fontWeight: "bold" }}>{playstation.title}</h2>
-              <p style={{ color: "#4a5568" }}>{playstation.description || "Sem descrição disponível."}</p>
+              <h2 style={{ fontSize: "1.25rem", fontWeight: "bold" }}>
+                {playstation.name || playstation.title || "Sem título"}
+              </h2>
+
+              <p style={{ color: "#4a5568", margin: "0.5rem 0" }}>
+                <strong>Gênero:</strong>{" "}
+                {Array.isArray(playstation.genre)
+                  ? playstation.genre.join(", ")
+                  : playstation.genre || "N/A"}
+              </p>
+
+              <p style={{ color: "#4a5568", margin: "0.25rem 0" }}>
+                <strong>Desenvolvedores:</strong>{" "}
+                {Array.isArray(playstation.developers)
+                  ? playstation.developers.join(", ")
+                  : playstation.developers || "N/A"}
+              </p>
+
+              <p style={{ color: "#4a5568", margin: "0.25rem 0" }}>
+                <strong>Editora(s):</strong>{" "}
+                {Array.isArray(playstation.publishers)
+                  ? playstation.publishers.join(", ")
+                  : playstation.publishers || "N/A"}
+              </p>
+
+              {playstation.releaseDates && typeof playstation.releaseDates === "object" && (
+                <div style={{ color: "#4a5568", marginTop: "0.5rem" }}>
+                  <strong>Datas de Lançamento:</strong>
+                  <ul style={{ marginTop: "0.25rem", paddingLeft: "1.25rem", marginBottom: 0 }}>
+                    {Object.entries(playstation.releaseDates).map(([region, date]) => (
+                      <li key={region}>
+                        {region}: {date || "N/A"}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </div>
           ))}
         </div>
