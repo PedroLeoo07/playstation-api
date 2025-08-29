@@ -6,8 +6,14 @@ import Image from "next/image";
 export default function Home() {
     return (
         <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-blue-900 to-blue-700 px-8">
-            <div className="bg-white shadow-2xl rounded-3xl p-16 w-[50rem] transform transition duration-500 hover:scale-105 mt-16 mx-8">
+            <div className="bg-white shadow-2xl rounded-3xl p-16 w-[50rem] transform transition duration-500 mt-16 mx-8">
+                {/* Dados do perfil */}
                 <div className="flex flex-col items-center">
+                    {/* Nome da turma */}
+                    <span className="text-blue-700 font-semibold text-lg mb-1">Turma: 2TDS1</span>
+                    {/* Nome da escola */}
+                    <span className="text-blue-500 font-medium text-base mb-2">SENAI Valinhos</span>
+                    {/* Foto do aluno */}
                     <Image
                         className="w-28 h-28 rounded-full border-4 border-blue-500 shadow-lg"
                         src="/images/eu.webp"
@@ -15,18 +21,24 @@ export default function Home() {
                         width={112}
                         height={112}
                     />
+                    {/* Nome completo do aluno */}
                     <h1 className="text-3xl font-extrabold mt-6 text-gray-900">Leonardo Oliveira</h1>
+                    {/* Frase inspiradora */}
+                    <p className="italic text-blue-600 mt-2 text-center max-w-xl">
+                        "A tecnologia move o mundo, mas a curiosidade move a tecnologia." 
+                    </p>
+                    {/* Email */}
                     <p className="text-gray-600 mt-2">leonardo.p.oliveira12@aluno.senai.br</p>
                 </div>
-                <div className="mt-10">
+                <div className="mt-14">
                     <h2 className="text-xl font-bold text-gray-900">Sobre</h2>
                     <p className="text-gray-700 mt-4 text-base leading-relaxed">
                         Um jovem apaixonado por tecnologia e programação, sempre curioso em entender como as coisas funcionam “por trás das telas”. Dedica parte do seu tempo a aprender novas linguagens, desenvolver projetos pessoais e explorar soluções criativas para problemas do dia a dia. Gosta de se desafiar com códigos, busca constantemente evolução no mundo digital e sonha em transformar suas ideias em ferramentas úteis para as pessoas.
                     </p>
                 </div>
-                <div className="mt-10">
+                <div className="mt-14">
                     <h2 className="text-xl font-bold text-gray-900">Habilidades</h2>
-                    <div className="flex justify-around mt-6">
+                    <div className="flex justify-around mt-6 flex-wrap gap-6">
                         <Image
                             src="/icons/html.png"
                             alt="HTML5"
@@ -62,9 +74,31 @@ export default function Home() {
                             height={50}
                             title="CSS3"
                         />
+                        {/* Novas habilidades */}
+                        <Image
+                            src="/icons/postgresql.png"
+                            alt="PostgreSQL"
+                            width={50}
+                            height={50}
+                            title="PostgreSQL"
+                        />
+                        <Image
+                            src="/icons/react-native.png"
+                            alt="React Native"
+                            width={50}
+                            height={50}
+                            title="React Native"
+                        />
+                        <Image
+                            src="/icons/typescript.png"
+                            alt="TypeScript"
+                            width={50}
+                            height={50}
+                            title="TypeScript"
+                        />
                     </div>
                 </div>
-                <div className="mt-10">
+                <div className="mt-14">
                     <h2 className="text-xl font-bold text-gray-900">Projetos Recentes</h2>
                     <ul className="list-none list-inside text-gray-700 mt-4 text-base space-y-2">
                         <li>
@@ -84,7 +118,7 @@ export default function Home() {
                         </li>
                     </ul>
                 </div>
-                <div className="mt-10">
+                <div className="mt-14">
                     <h2 className="text-xl font-bold text-gray-900">Educação</h2>
                     <ul className="list-none list-inside text-gray-700 mt-4 text-base space-y-2">
                         <li>
@@ -95,7 +129,7 @@ export default function Home() {
                         </li>
                     </ul>
                 </div>
-                <div className="mt-10">
+                <div className="mt-14">
                     <h2 className="text-xl font-bold text-gray-900">Contato</h2>
                     <ul className="list-none list-inside text-gray-700 mt-4 text-base space-y-2">
                         <li>
