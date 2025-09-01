@@ -3,7 +3,7 @@
     padding: 32px;
     max-width: 1100px;
     margin: 24px auto;
-    color: #ffffff;
+    color: #000000;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
@@ -11,7 +11,7 @@
   .hero {
     background:
       linear-gradient(180deg, rgba(2,6,23,0.78), rgba(7,12,23,0.88)),
-      url("/images/playstation-bg.jpg");
+      url("/images/playstation3-bg.jpg");
     border-radius: 16px;
     padding: 28px;
     box-shadow: 0 10px 40px rgba(2,6,23,0.6);
