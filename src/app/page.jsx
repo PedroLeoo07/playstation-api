@@ -1,140 +1,54 @@
-"use client";
+'use client'
 
-import React from "react";
-import Image from "next/image";
-import styles from "./page.module.css";
+import { useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 
-export default function Home() {
-	return (
-		<div className={styles.container}>
-			<div className={styles.profileCard}>
-				{/* Dados do perfil */}
-				<div className={styles.profileHeader}>
-					{/* Nome da turma */}
-					<span className={styles.classInfo}>Turma: 2TDS1</span>
-					{/* Nome da escola */}
-					<span className={styles.schoolInfo}>SENAI Valinhos</span>
-					{/* Foto do aluno */}
-					<div className={styles.profileImageWrapper}>
-						<Image
-							className={styles.profileImage}
-							src="/images/eu.webp"
-							alt="Profile"
-							width={112}
-							height={112}
-						/>
-					</div>
-					{/* Nome completo do aluno */}
-					<h1 className={styles.profileName}>Leonardo Oliveira</h1>
-					{/* Frase inspiradora */}
-					<p className={styles.inspirationalQuote}>
-						"A tecnologia move o mundo, mas a curiosidade move a tecnologia."
-					</p>
-					{/* Email */}
-					<p className={styles.email}>leonardo.p.oliveira12@aluno.senai.br</p>
-				</div>
+export default function LoadingPage() {
+  const router = useRouter()
 
-				<div className={styles.section}>
-					<h2 className={styles.sectionTitle}>Sobre</h2>
-					<p className={styles.sectionText}>
-						Um jovem apaixonado por tecnologia e programação, sempre curioso em entender como as coisas
-						funcionam "por trás das telas". Dedica parte do seu tempo a aprender novas linguagens,
-						desenvolver projetos pessoais e explorar soluções criativas para problemas do dia a dia. Gosta
-						de se desafiar com códigos, busca constantemente evolução no mundo digital e sonha em transformar
-						suas ideias em ferramentas úteis para as pessoas.
-					</p>
-				</div>
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      router.push('/home')
+    }, 3000)
 
-				<div className={styles.section}>
-					<h2 className={styles.sectionTitle}>Habilidades</h2>
-					<div className={styles.skillsGrid}>
-						<div className={styles.skillItem}>
-							<Image src="/icons/html.png" alt="HTML5" width={50} height={50} title="HTML5" />
-						</div>
-						<div className={styles.skillItem}>
-							<Image src="/icons/js.png" alt="JavaScript" width={50} height={50} title="JavaScript" />
-						</div>
-						<div className={styles.skillItem}>
-							<Image src="/icons/next.png" alt="Next.js" width={50} height={50} title="Next.js" />
-						</div>
-						<div className={styles.skillItem}>
-							<Image src="/icons/node.png" alt="Node.js" width={50} height={50} title="Node.js" />
-						</div>
-						<div className={styles.skillItem}>
-							<Image src="/icons/css.png" alt="CSS3" width={50} height={50} title="CSS3" />
-						</div>
-						<div className={styles.skillItem}>
-							<Image src="/icons/sql.png" alt="PostgreSQL" width={50} height={50} title="PostgreSQL" />
-						</div>
-						<div className={styles.skillItem}>
-							<Image src="/icons/react.png" alt="React Native" width={50} height={50} title="React Native" />
-						</div>
-						<div className={styles.skillItem}>
-							<Image src="/icons/ts.png" alt="TypeScript" width={50} height={50} title="TypeScript" />
-						</div>
-					</div>
-				</div>
+    return () => clearTimeout(timer)
+  }, [router])
 
-				<div className={styles.section}>
-					<h2 className={styles.sectionTitle}>Projetos Recentes</h2>
-					<ul className={styles.projectsList}>
-						<li className={styles.projectItem}>
-							<a href="https://lab-oliveira-leo.vercel.app/" className={styles.projectLink}>
-								Portfolio
-							</a>
-						</li>
-						<li className={styles.projectItem}>
-							<a href="https://dicionario-next.vercel.app/" className={styles.projectLink}>
-								Dicionário Inteligente
-							</a>
-						</li>
-						<li className={styles.projectItem}>
-							<a href="https://front-end-rm-api.vercel.app/home" className={styles.projectLink}>
-								Rick and Morty API
-							</a>
-						</li>
-					</ul>
-				</div>
-
-				<div className={styles.section}>
-					<h2 className={styles.sectionTitle}>Educação</h2>
-					<ul className={styles.educationList}>
-						<li className={styles.educationItem}>
-							<strong>Curso Técnico em Desenvolvimento de Sistemas</strong> - SENAI Valinhos
-						</li>
-						<li className={styles.educationItem}>
-							<strong>Ensino Médio</strong> - Sesi Valinhos 299
-						</li>
-					</ul>
-				</div>
-
-				<div className={styles.section}>
-					<h2 className={styles.sectionTitle}>Contato</h2>
-					<ul className={styles.contactList}>
-						<li className={styles.contactItem}>
-							<strong>Telefone:</strong> (19) 98872-7143
-						</li>
-						<li className={styles.contactItem}>
-							<strong>LinkedIn:</strong>
-							<a href="https://www.linkedin.com/in/leonardo-oliveira-38aab7321/" className={styles.contactLink}>
-								Leonardo Oliveira
-							</a>
-						</li>
-						<li className={styles.contactItem}>
-							<strong>GitHub:</strong>
-							<a href="https://github.com/PedroLeoo07" className={styles.contactLink}>
-								PedroLeoo07
-							</a>
-						</li>
-					</ul>
-				</div>
-
-				<div className={styles.nextPageWrapper}>
-					<a href="/api" className={styles.nextPageButton}>
-						Próxima Página
-					</a>
-				</div>
-			</div>
-		</div>
-	);
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 flex items-center justify-center relative overflow-hidden">
+   
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-700/20 via-transparent to-transparent"></div>
+      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse"></div>
+      <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-indigo-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
+      
+      <div className="relative z-10 text-center space-y-8">
+      
+        <div className="relative">
+          <div className="w-20 h-20 border-4 border-blue-400/30 rounded-full mx-auto"></div>
+          <div className="absolute inset-0 w-20 h-20 border-4 border-transparent border-t-blue-400 rounded-full animate-spin mx-auto"></div>
+          <div className="absolute inset-2 w-16 h-16 border-2 border-transparent border-t-blue-300 rounded-full animate-spin animate-reverse mx-auto"></div>
+        </div>
+        
+    
+        <div className="space-y-2">
+          <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-blue-600 bg-clip-text text-transparent drop-shadow-2xl">
+            PlayStation API
+          </h1>
+          <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto rounded-full"></div>
+        </div>
+        
+      
+        <p className="text-blue-200 text-lg font-medium animate-pulse">
+          Carregando experiência...
+        </p>
+        
+      
+        <div className="flex justify-center space-x-2">
+          <div className="w-2 h-2 bg-blue-400 rounded-full animate-bounce"></div>
+          <div className="w-2 h-2 bg-blue-400 rounded-full animate-bounce delay-150"></div>
+          <div className="w-2 h-2 bg-blue-400 rounded-full animate-bounce delay-300"></div>
+        </div>
+      </div>
+    </div>
+  )
 }
