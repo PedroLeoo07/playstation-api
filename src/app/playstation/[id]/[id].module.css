@@ -1,0 +1,198 @@
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 24px;
+    background-color: #f5f5f5;
+    min-height: 100vh;
+}
+
+.loadingWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 60vh;
+    gap: 16px;
+}
+
+.loadingText {
+    color: #666;
+    font-size: 16px;
+    margin: 0;
+}
+
+.errorWrapper {
+    text-align: center;
+    padding: 48px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+    padding: 16px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.backButton {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.title {
+    margin: 0;
+    color: #262626;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.contentWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.mainCard {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    border: none;
+}
+
+.playstationHeader {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 8px 0;
+}
+
+.icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #003791 0%, #0070f3 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.iconImage {
+    font-size: 40px;
+    color: white;
+}
+
+.playstationInfo {
+    flex: 1;
+}
+
+.modelName {
+    margin: 0 0 8px 0;
+    font-size: 28px;
+    font-weight: 600;
+    color: #262626;
+}
+
+.price {
+    margin: 0 0 4px 0;
+    font-size: 20px;
+    color: #52c41a;
+    font-weight: 600;
+}
+
+.email {
+    margin: 0;
+    font-size: 16px;
+    color: #1890ff;
+    font-weight: 500;
+}
+
+.statusTag {
+    font-size: 14px;
+    padding: 4px 12px;
+}
+
+.detailCard {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    border: none;
+}
+
+.detailCard .ant-card-head {
+    background: #fafafa;
+    border-bottom: 1px solid #e8e8e8;
+}
+
+.detailCard .ant-card-head-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    color: #262626;
+}
+
+.featuresWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.featureTag {
+    margin: 2px 0;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .container {
+        padding: 16px;
+    }
+    
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+    
+    .playstationHeader {
+        flex-direction: column;
+        text-align: center;
+        gap: 16px;
+    }
+    
+    .modelName {
+        font-size: 24px;
+    }
+    
+    .contentWrapper {
+        gap: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .icon {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .iconImage {
+        font-size: 30px;
+    }
+    
+    .modelName {
+        font-size: 20px;
+    }
+    
+    .title {
+        font-size: 20px;
+    }
+    
+    .price {
+        font-size: 18px;
+    }
+}
