@@ -4,7 +4,7 @@ export const metadata = {
     title: "API Playstation",
     description: "Projeto pra mostrar jogos de ps4 e ps5",
     icons: {
-        icon: "/icons/controle.png",
+        icon: "/images/logoPS.png",
     },
 };
 

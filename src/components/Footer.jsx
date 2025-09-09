@@ -14,7 +14,13 @@ export default function Footer() {
           <div className={styles.brandSection}>
             <div className={styles.logo}>
               <div className={styles.playstationLogo}>
-                <span className={styles.psText}>PlayStation</span>
+                <Image 
+                  src="/images/logoPS.png" 
+                  alt="PlayStation" 
+                  width={100} 
+                  height={25} 
+                  className={styles.psLogo}
+                />
                 <div className={styles.psSymbols}>
                   <span className={styles.triangle}>△</span>
                   <span className={styles.square}>□</span>

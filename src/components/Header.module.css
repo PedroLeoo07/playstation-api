@@ -1,11 +1,12 @@
 .header {
-  background: linear-gradient(135deg, #003087 0%, #0070f3 50%, #00d4ff 100%);
-  box-shadow: 0 4px 20px rgba(0, 48, 135, 0.3);
+  background: linear-gradient(135deg, #003791 0%, #0070d1 30%, #003791 70%, #001e42 100%);
+  box-shadow: 0 4px 20px rgba(0, 55, 145, 0.4);
   position: sticky;
   top: 0;
   z-index: 1000;
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
+  border-bottom: 2px solid rgba(0, 112, 209, 0.3);
 }
 
 .container {
@@ -43,15 +44,17 @@
   margin-right: 0.5rem;
 }
 
-.psText {
-  font-weight: 700;
-  font-size: 1.4rem;
-  background: linear-gradient(45deg, #003087, #0070f3, #00d4ff);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  margin-right: 0.3rem;
-  text-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
+.psLogo {
+  margin-right: 0.5rem;
+  filter: brightness(1.1) drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
+  transition: all 0.3s ease;
+  max-height: 20px;
+  width: auto;
+}
+
+.psLogo:hover {
+  filter: brightness(1.2) drop-shadow(0 0 15px rgba(255, 255, 255, 0.5));
+  transform: scale(1.05);
 }
 
 .psSymbols {
@@ -71,22 +74,22 @@
 }
 
 .triangle {
-  color: #00ff87;
+  color: #00c853;
   animation-delay: 0s;
 }
 
 .square {
-  color: #ff6b9d;
+  color: #e91e63;
   animation-delay: 0.5s;
 }
 
 .circle {
-  color: #4dabf7;
+  color: #2196f3;
   animation-delay: 1s;
 }
 
 .x {
-  color: #ffd43b;
+  color: #ff9800;
   animation-delay: 1.5s;
 }
 
@@ -154,11 +157,12 @@
 }
 
 .navLink:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.15);
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 5px 15px rgba(0, 55, 145, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 /* Menu Mobile */
@@ -207,7 +211,7 @@
   left: 0;
   width: 100%;
   height: calc(100vh - 70px);
-  background: linear-gradient(135deg, #003087 0%, #0070f3 50%, #00d4ff 100%);
+  background: linear-gradient(135deg, #003791 0%, #0070d1 30%, #003791 70%, #001e42 100%);
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   transform: translateX(-100%);
@@ -250,11 +254,14 @@
   background: rgba(255, 255, 255, 0.1);
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .mobileNavLink:hover {
   background: rgba(255, 255, 255, 0.2);
   transform: translateX(10px);
+  border-color: rgba(0, 112, 209, 0.5);
+  box-shadow: 0 4px 15px rgba(0, 55, 145, 0.2);
 }
 
 @keyframes slideInMobile {
@@ -297,8 +304,9 @@
     height: calc(100vh - 60px);
   }
   
-  .psText {
-    font-size: 1.1rem;
+  .psLogo {
+    max-height: 16px;
+    width: auto;
   }
   
   .psSymbols {

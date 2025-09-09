@@ -19,7 +19,14 @@ export default function Header() {
         <div className={styles.logo}>
           <Link href="/home">
             <div className={styles.playstationLogo}>
-              <span className={styles.psText}>PlayStation</span>
+              <Image 
+                src="/images/logoPS.png" 
+                alt="PlayStation" 
+                width={80} 
+                height={20} 
+                className={styles.psLogo}
+                priority
+              />
               <div className={styles.psSymbols}>
                 <span className={styles.triangle}>△</span>
                 <span className={styles.square}>□</span>
