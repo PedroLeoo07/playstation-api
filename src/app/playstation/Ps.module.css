@@ -175,7 +175,6 @@
   border: 2px solid rgba(66,153,225,0.3);
   border-radius: 50px;
   background: rgba(255,255,255,0.95);
-  backdrop-filter: blur(10px);
   font-size: 1rem;
   color: #2d3748;
   transition: all 0.3s ease;
@@ -199,7 +198,6 @@
   background: rgba(49,130,206,0.2);
   padding: 0.5rem 1rem;
   border-radius: 20px;
-  backdrop-filter: blur(10px);
   border: 1px solid rgba(66,153,225,0.3);
 }
 
@@ -338,7 +336,6 @@
   background: rgba(49,130,206,0.15);
   padding: 0.5rem 1rem;
   border-radius: 20px;
-  backdrop-filter: blur(10px);
   border: 1px solid rgba(66,153,225,0.2);
   font-size: 0.9rem;
 }
@@ -417,7 +414,6 @@
 
 .card {
   background: rgba(255,255,255,0.98);
-  backdrop-filter: blur(20px);
   border: 1px solid rgba(66,153,225,0.2);
   border-radius: 24px;
   overflow: hidden;
@@ -709,12 +705,11 @@
   }
 }
 
-/* Modal Styles */
+
 .modalOverlay {
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.8);
-  backdrop-filter: blur(8px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -730,7 +725,6 @@
 
 .modalContent {
   background: rgba(255, 255, 255, 0.98);
-  backdrop-filter: blur(20px);
   border-radius: 24px;
   max-width: 600px;
   width: 100%;

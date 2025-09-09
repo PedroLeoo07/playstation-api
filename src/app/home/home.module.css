@@ -70,7 +70,6 @@
   padding: 4rem;
   border-radius: 2rem;
   background: linear-gradient(135deg, rgba(0, 45, 98, 0.95), rgba(0, 48, 135, 0.95), rgba(123, 97, 255, 0.95));
-  backdrop-filter: blur(20px);
   border: 2px solid rgba(255, 255, 255, 0.1);
   box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
   animation: fadeInUp 1s ease-out, glow 3s ease-in-out infinite;
@@ -139,8 +138,8 @@
   margin-bottom: 1rem;
   text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   background: linear-gradient(45deg, #ffffff, #7b61ff);
-  background-clip: text;
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
@@ -211,7 +210,6 @@
   border-radius: 1rem;
   border: 1px solid rgba(255, 255, 255, 0.2);
   transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
 }
 
 .skillItem:hover {
@@ -294,7 +292,6 @@
   font-weight: 600;
   font-size: 1.125rem;
   transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   position: relative;
   overflow: hidden;
