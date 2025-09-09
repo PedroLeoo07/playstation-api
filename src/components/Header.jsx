@@ -18,14 +18,16 @@ export default function Header() {
         {/* Logo PlayStation */}
         <div className={styles.logo}>
           <Link href="/home">
-            <Image 
-              src="/icons/controle.png" 
-              alt="PlayStation" 
-              width={40} 
-              height={40} 
-              className={styles.logoIcon}
-            />
-            <span className={styles.logoText}>PlayStation API</span>
+            <div className={styles.playstationLogo}>
+              <span className={styles.psText}>PlayStation</span>
+              <div className={styles.psSymbols}>
+                <span className={styles.triangle}>△</span>
+                <span className={styles.square}>□</span>
+                <span className={styles.circle}>○</span>
+                <span className={styles.x}>✕</span>
+              </div>
+            </div>
+            <span className={styles.logoText}>API</span>
           </Link>
         </div>
 

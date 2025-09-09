@@ -13,14 +13,16 @@ export default function Footer() {
           {/* Logo e Descrição */}
           <div className={styles.brandSection}>
             <div className={styles.logo}>
-              <Image 
-                src="/icons/controle.png" 
-                alt="PlayStation" 
-                width={32} 
-                height={32} 
-                className={styles.logoIcon}
-              />
-              <span className={styles.logoText}>PlayStation API</span>
+              <div className={styles.playstationLogo}>
+                <span className={styles.psText}>PlayStation</span>
+                <div className={styles.psSymbols}>
+                  <span className={styles.triangle}>△</span>
+                  <span className={styles.square}>□</span>
+                  <span className={styles.circle}>○</span>
+                  <span className={styles.x}>✕</span>
+                </div>
+              </div>
+              <span className={styles.logoText}>API</span>
             </div>
             <p className={styles.description}>
               Descubra os melhores jogos do PlayStation 4 e PlayStation 5. 

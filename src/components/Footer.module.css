@@ -31,9 +31,69 @@
   margin-bottom: 1rem;
 }
 
-.logoIcon {
+.playstationLogo {
+  display: flex;
+  align-items: center;
   margin-right: 0.5rem;
-  filter: brightness(1.2);
+}
+
+.psText {
+  font-weight: 700;
+  font-size: 1.8rem;
+  background: linear-gradient(45deg, #003087, #0070f3, #00d4ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-right: 0.4rem;
+  text-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
+}
+
+.psSymbols {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  margin-right: 0.4rem;
+}
+
+.triangle,
+.square,
+.circle,
+.x {
+  font-size: 1rem;
+  font-weight: bold;
+  animation: footerSymbolGlow 4s ease-in-out infinite;
+}
+
+.triangle {
+  color: #00ff87;
+  animation-delay: 0s;
+}
+
+.square {
+  color: #ff6b9d;
+  animation-delay: 0.7s;
+}
+
+.circle {
+  color: #4dabf7;
+  animation-delay: 1.4s;
+}
+
+.x {
+  color: #ffd43b;
+  animation-delay: 2.1s;
+}
+
+@keyframes footerSymbolGlow {
+  0%, 100% {
+    opacity: 0.6;
+    text-shadow: 0 0 8px currentColor;
+  }
+  25% {
+    opacity: 1;
+    text-shadow: 0 0 20px currentColor, 0 0 30px currentColor;
+    transform: scale(1.15);
+  }
 }
 
 .logoText {
@@ -274,5 +334,20 @@
   .copyright,
   .schoolInfo {
     font-size: 0.8rem;
+  }
+  
+  .psText {
+    font-size: 1.4rem;
+  }
+  
+  .psSymbols {
+    gap: 2px;
+  }
+  
+  .triangle,
+  .square,
+  .circle,
+  .x {
+    font-size: 0.9rem;
   }
 }
