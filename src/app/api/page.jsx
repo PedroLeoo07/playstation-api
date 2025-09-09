@@ -2,12 +2,14 @@
 
 import styles from './Api.module.css';
 import { useRouter } from 'next/navigation'; 
+import PageLayout from "@/components/PageLayout";
 
 export default function Api() {
   const router = useRouter();
 
   return (
-    <div className={`${styles.container} ${styles.hero}`}>
+    <PageLayout>
+      <div className={`${styles.container} ${styles.hero}`}>
       <div className={styles.backgroundEffect}></div>
       
       <header className={styles.header}>
@@ -98,5 +100,6 @@ export default function Api() {
         <div className={styles.buttonGlow}></div>
       </button>
     </div>
+    </PageLayout>
   );
 }

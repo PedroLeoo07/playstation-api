@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import PageLayout from "@/components/PageLayout";
 import style from "./not-found.module.css"
 
 const NotFound = () => {
@@ -37,7 +38,8 @@ const NotFound = () => {
   };
 
   return (
-    <div className={`${style['not-found-container']} ${glitchActive ? style.glitch : ''}`}>
+    <PageLayout>
+      <div className={`${style['not-found-container']} ${glitchActive ? style.glitch : ''}`}>
       <div className={style['ps-background']}>
         <div className={style['ps-symbols']}>
           <span className={`${style.symbol} ${style.triangle} ${style.floating}`}>△</span>
@@ -129,6 +131,7 @@ const NotFound = () => {
         </div>
       </div>
     </div>
+    </PageLayout>
   );
 };
 

@@ -1,0 +1,278 @@
+.footer {
+  background: linear-gradient(135deg, #001122 0%, #003087 30%, #0070f3 70%, #00d4ff 100%);
+  color: white;
+  position: relative;
+  overflow: hidden;
+  margin-top: auto;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3rem 1rem 1rem;
+  position: relative;
+  z-index: 2;
+}
+
+.mainSection {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 3rem;
+  margin-bottom: 2rem;
+}
+
+.brandSection {
+  max-width: 300px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.logoIcon {
+  margin-right: 0.5rem;
+  filter: brightness(1.2);
+}
+
+.logoText {
+  font-size: 1.5rem;
+  font-weight: 700;
+  background: linear-gradient(45deg, #ffffff, #e0e7ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.description {
+  color: #e0e7ff;
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+.navSection,
+.techSection {
+  display: flex;
+  flex-direction: column;
+}
+
+.sectionTitle {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #ffffff;
+}
+
+.navList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navList li {
+  margin-bottom: 0.75rem;
+}
+
+.navLink {
+  color: #b3c6ff;
+  text-decoration: none;
+  font-weight: 400;
+  transition: all 0.3s ease;
+  padding: 0.25rem 0;
+  display: inline-block;
+  position: relative;
+}
+
+.navLink::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(45deg, #00d4ff, #0070f3);
+  transition: width 0.3s ease;
+}
+
+.navLink:hover {
+  color: #ffffff;
+  transform: translateX(5px);
+}
+
+.navLink:hover::after {
+  width: 100%;
+}
+
+.techIcons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.techItem {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #b3c6ff;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  padding: 0.5rem;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+.techItem:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+.bottomSection {
+  margin-top: 2rem;
+}
+
+.divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  margin-bottom: 1.5rem;
+}
+
+.footerBottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.copyright {
+  color: #b3c6ff;
+  font-size: 0.9rem;
+}
+
+.schoolInfo {
+  color: #e0e7ff;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+/* Elementos Decorativos */
+.decorativeElements {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.circle1,
+.circle2,
+.circle3 {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 212, 255, 0.1), transparent);
+}
+
+.circle1 {
+  width: 200px;
+  height: 200px;
+  top: -100px;
+  right: -100px;
+  animation: float1 8s ease-in-out infinite;
+}
+
+.circle2 {
+  width: 150px;
+  height: 150px;
+  bottom: -75px;
+  left: -75px;
+  animation: float2 6s ease-in-out infinite reverse;
+}
+
+.circle3 {
+  width: 100px;
+  height: 100px;
+  top: 50%;
+  right: 10%;
+  animation: float3 10s ease-in-out infinite;
+}
+
+@keyframes float1 {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-20px) scale(1.1);
+  }
+}
+
+@keyframes float2 {
+  0%, 100% {
+    transform: translateX(0) scale(1);
+  }
+  50% {
+    transform: translateX(15px) scale(0.9);
+  }
+}
+
+@keyframes float3 {
+  0%, 100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate(10px, -10px) rotate(180deg);
+  }
+}
+
+/* Responsive */
+@media (max-width: 968px) {
+  .mainSection {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+  
+  .brandSection {
+    grid-column: 1 / -1;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 640px) {
+  .container {
+    padding: 2rem 1rem 1rem;
+  }
+  
+  .mainSection {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .techIcons {
+    grid-template-columns: 1fr;
+  }
+  
+  .footerBottom {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .logoText {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 1.5rem 0.75rem 1rem;
+  }
+  
+  .copyright,
+  .schoolInfo {
+    font-size: 0.8rem;
+  }
+}

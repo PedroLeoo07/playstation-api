@@ -5,6 +5,7 @@ import axios from "axios";
 import styles from "./Ps.module.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import PageLayout from "@/components/PageLayout";
 
 // Hook utilitário simples
 function useMounted() {
@@ -143,7 +144,8 @@ export default function Page() {
   );
 
   return (
-    <div className={styles.container}>
+    <PageLayout>
+      <div className={styles.container}>
       <div className={styles.particlesContainer}>
         {Array.from({ length: 50 }, (_, i) => (
           <div key={i} className={styles.particle} style={{
@@ -297,5 +299,6 @@ export default function Page() {
       
       <ToastContainer position="bottom-right" theme="dark" newestOnTop pauseOnFocusLoss={false} />
     </div>
+    </PageLayout>
   );
 }

@@ -2,11 +2,13 @@
 
 import React from "react";
 import Image from "next/image";
+import PageLayout from "@/components/PageLayout";
 import styles from "../home/home.module.css";
 
 export default function Home() {
 	return (
-		<div className={styles.container}>
+		<PageLayout>
+			<div className={styles.container}>
 			<div className={styles.profileCard}>
 				{/* Dados do perfil */}
 				<div className={styles.profileHeader}>
@@ -136,5 +138,6 @@ export default function Home() {
 				</div>
 			</div>
 		</div>
+		</PageLayout>
 	);
 }
