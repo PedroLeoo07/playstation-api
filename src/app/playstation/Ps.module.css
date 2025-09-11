@@ -319,6 +319,134 @@
   animation: iconBounce 2s ease-in-out infinite;
 }
 
+/* Estilos para busca por modo */
+.searchModeContainer {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+  animation: fadeInUp 0.8s ease-out 0.3s both;
+}
+
+.searchModeToggle {
+  display: flex;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50px;
+  padding: 4px;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(66, 153, 225, 0.2);
+}
+
+.modeButton {
+  padding: 0.75rem 1.5rem;
+  background: transparent;
+  border: none;
+  border-radius: 46px;
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.modeButton::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #4299e1, #7b61ff);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.modeButton.active {
+  color: #fff;
+  background: linear-gradient(135deg, #4299e1, #7b61ff);
+  box-shadow: 0 4px 20px rgba(66, 153, 225, 0.3);
+}
+
+.modeButton.active::before {
+  opacity: 1;
+}
+
+.modeButton:hover:not(.active) {
+  color: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Estilos para busca por ID */
+.searchByIdContainer {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+  animation: fadeInUp 0.8s ease-out 0.4s both;
+}
+
+.searchByIdInput {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.1);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border-radius: 50px;
+  padding: 8px;
+  border: 1px solid rgba(66, 153, 225, 0.3);
+  max-width: 500px;
+  width: 100%;
+}
+
+.idInput {
+  flex: 1;
+  background: transparent;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  color: #fff;
+  font-size: 1rem;
+  outline: none;
+  border-radius: 42px;
+}
+
+.idInput::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.idInput:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.searchByIdButton {
+  background: linear-gradient(135deg, #4299e1, #7b61ff);
+  color: #fff;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 42px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.searchByIdButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.searchByIdButton:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(66, 153, 225, 0.4);
+}
+
+.searchByIdButton:active:not(:disabled) {
+  transform: translateY(0);
+}
+
 @keyframes iconBounce {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-2px); }

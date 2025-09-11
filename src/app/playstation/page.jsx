@@ -54,6 +54,43 @@ function usePlaystationGames({ setPlaystations, setLoading }) {
     }
   }, [setPlaystations, setLoading]);
 
+  const fetchGameById = useCallback(async (gameId) => {
+    if (controllerRef.current) controllerRef.current.abort();
+    controllerRef.current = new AbortController();
+    
+    try {
+      setLoading(true);
+      toast.dismiss();
+      toast.info(`Buscando jogo ID: ${gameId}...`, { autoClose: 1200 });
+      
+      const res = await axios.get(`https://api.sampleapis.com/playstation/games/${gameId}`, {
+        signal: controllerRef.current.signal
+      });
+      
+      // Se encontrou o jogo, define apenas esse jogo na lista
+      if (res.data) {
+        setPlaystations([res.data]);
+        setFetchedAt(new Date());
+        toast.success(`Jogo encontrado! 🎮`, { autoClose: 2400 });
+      } else {
+        toast.error(`Jogo com ID ${gameId} não encontrado`, { autoClose: 2500 });
+        setPlaystations([]);
+      }
+    } catch (err) {
+      if (axios.isCancel(err)) {
+        toast.warning("Busca cancelada", { autoClose: 1500 });
+      } else if (err.response?.status === 404) {
+        toast.error(`Jogo com ID ${gameId} não encontrado`, { autoClose: 2500 });
+        setPlaystations([]);
+      } else {
+        console.error(err);
+        toast.error("Erro ao buscar jogo por ID", { autoClose: 2500 });
+      }
+    } finally {
+      setLoading(false);
+    }
+  }, [setPlaystations, setLoading]);
+
   const clear = useCallback(() => {
     setPlaystations([]);
     cacheRef.current = null;
@@ -61,7 +98,7 @@ function usePlaystationGames({ setPlaystations, setLoading }) {
     toast.info("Lista limpa", { autoClose: 1400 });
   }, [setPlaystations]);
 
-  return { fetchGames, clear, fetchedAt, hasCache: !!cacheRef.current };
+  return { fetchGames, fetchGameById, clear, fetchedAt, hasCache: !!cacheRef.current };
 }
 
 // Componente Modal
@@ -131,12 +168,22 @@ export default function Page() {
   const [loading, setLoading] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedGame, setSelectedGame] = useState(null);
+  const [gameId, setGameId] = useState("");
+  const [searchMode, setSearchMode] = useState("all"); // "all" ou "id"
 
-  const { fetchGames, clear, fetchedAt, hasCache } = usePlaystationGames({
+  const { fetchGames, fetchGameById, clear, fetchedAt, hasCache } = usePlaystationGames({
     setPlaystations,
     setLoading
   });
   useMounted();
+
+  const handleSearchById = () => {
+    if (!gameId.trim()) {
+      toast.warning("Digite um ID válido", { autoClose: 1500 });
+      return;
+    }
+    fetchGameById(gameId.trim());
+  };
 
   const filteredGames = playstations.filter(game =>
     (game.name || game.title || "").toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -193,17 +240,59 @@ export default function Page() {
           </div>
         )}
 
+        <div className={styles.searchModeContainer}>
+          <div className={styles.searchModeToggle}>
+            <button
+              onClick={() => setSearchMode("all")}
+              className={`${styles.modeButton} ${searchMode === "all" ? styles.active : ""}`}
+            >
+              Todos os Jogos
+            </button>
+            <button
+              onClick={() => setSearchMode("id")}
+              className={`${styles.modeButton} ${searchMode === "id" ? styles.active : ""}`}
+            >
+              Buscar por ID
+            </button>
+          </div>
+        </div>
+
+        {searchMode === "id" && (
+          <div className={styles.searchByIdContainer}>
+            <div className={styles.searchByIdInput}>
+              <input
+                type="text"
+                placeholder="Digite o ID do jogo (ex: 1, 2, 3...)"
+                value={gameId}
+                onChange={(e) => setGameId(e.target.value)}
+                className={styles.idInput}
+                disabled={loading}
+                onKeyPress={(e) => e.key === "Enter" && handleSearchById()}
+              />
+              <button
+                onClick={handleSearchById}
+                disabled={loading || !gameId.trim()}
+                className={styles.searchByIdButton}
+              >
+                {loading ? "Buscando..." : "🔍 Buscar"}
+              </button>
+            </div>
+          </div>
+        )}
+
         <div className={styles.actions}>
-          <button
-            onClick={() => fetchGames()}
-            className={`${styles.fetchButton} ${loading ? styles.loading : ''}`}
-            disabled={loading}
-          >
-            <span className={styles.buttonText}>
-              {loading ? "Carregando..." : "Buscar Jogos"}
-            </span>
-            <span className={styles.buttonIcon}>🎮</span>
-          </button>
+          {searchMode === "all" && (
+            <button
+              onClick={() => fetchGames()}
+              className={`${styles.fetchButton} ${loading ? styles.loading : ''}`}
+              disabled={loading}
+            >
+              <span className={styles.buttonText}>
+                {loading ? "Carregando..." : "Buscar Jogos"}
+              </span>
+              <span className={styles.buttonIcon}>🎮</span>
+            </button>
+          )}
           
           {playstations.length > 0 && !loading && (
             <button onClick={clear} className={styles.clearButton}>
