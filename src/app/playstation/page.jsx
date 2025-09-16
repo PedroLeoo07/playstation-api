@@ -91,6 +91,45 @@ function usePlaystationGames({ setPlaystations, setLoading }) {
     }
   }, [setPlaystations, setLoading]);
 
+  const addGame = useCallback(async (gameData) => {
+    if (controllerRef.current) controllerRef.current.abort();
+    controllerRef.current = new AbortController();
+    
+    try {
+      setLoading(true);
+      toast.dismiss();
+      toast.info("Adicionando jogo...", { autoClose: 1200 });
+      
+      const res = await axios.post("https://api.sampleapis.com/playstation/games", gameData, {
+        signal: controllerRef.current.signal,
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      
+      if (res.data) {
+        // Adiciona o novo jogo ao cache e à lista atual
+        if (cacheRef.current) {
+          cacheRef.current = [...cacheRef.current, res.data];
+        }
+        setPlaystations(prev => [...prev, res.data]);
+        setFetchedAt(new Date());
+        toast.success("Jogo adicionado com sucesso! 🎮", { autoClose: 2400 });
+        return res.data;
+      }
+    } catch (err) {
+      if (axios.isCancel(err)) {
+        toast.warning("Operação cancelada", { autoClose: 1500 });
+      } else {
+        console.error(err);
+        toast.error("Erro ao adicionar jogo", { autoClose: 2500 });
+      }
+      throw err;
+    } finally {
+      setLoading(false);
+    }
+  }, [setPlaystations, setLoading]);
+
   const clear = useCallback(() => {
     setPlaystations([]);
     cacheRef.current = null;
@@ -98,7 +137,7 @@ function usePlaystationGames({ setPlaystations, setLoading }) {
     toast.info("Lista limpa", { autoClose: 1400 });
   }, [setPlaystations]);
 
-  return { fetchGames, fetchGameById, clear, fetchedAt, hasCache: !!cacheRef.current };
+  return { fetchGames, fetchGameById, addGame, clear, fetchedAt, hasCache: !!cacheRef.current };
 }
 
 // Componente Modal
@@ -169,9 +208,15 @@ export default function Page() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedGame, setSelectedGame] = useState(null);
   const [gameId, setGameId] = useState("");
-  const [searchMode, setSearchMode] = useState("all"); // "all" ou "id"
+  const [searchMode, setSearchMode] = useState("all"); // "all", "id" ou "add"
+  const [newGameForm, setNewGameForm] = useState({
+    name: "",
+    genre: "",
+    developers: "",
+    publishers: ""
+  });
 
-  const { fetchGames, fetchGameById, clear, fetchedAt, hasCache } = usePlaystationGames({
+  const { fetchGames, fetchGameById, addGame, clear, fetchedAt, hasCache } = usePlaystationGames({
     setPlaystations,
     setLoading
   });
@@ -183,6 +228,36 @@ export default function Page() {
       return;
     }
     fetchGameById(gameId.trim());
+  };
+
+  const handleAddGame = async (e) => {
+    e.preventDefault();
+    
+    if (!newGameForm.name.trim()) {
+      toast.warning("Nome do jogo é obrigatório", { autoClose: 1500 });
+      return;
+    }
+
+    try {
+      const gameData = {
+        name: newGameForm.name.trim(),
+        genre: newGameForm.genre.trim() ? newGameForm.genre.split(',').map(g => g.trim()) : [],
+        developers: newGameForm.developers.trim() ? newGameForm.developers.split(',').map(d => d.trim()) : [],
+        publishers: newGameForm.publishers.trim() ? newGameForm.publishers.split(',').map(p => p.trim()) : []
+      };
+
+      await addGame(gameData);
+      
+      // Limpar formulário após sucesso
+      setNewGameForm({
+        name: "",
+        genre: "",
+        developers: "",
+        publishers: ""
+      });
+    } catch (err) {
+      // Erro já tratado no hook
+    }
   };
 
   const filteredGames = playstations.filter(game =>
@@ -254,6 +329,12 @@ export default function Page() {
             >
               Buscar por ID
             </button>
+            <button
+              onClick={() => setSearchMode("add")}
+              className={`${styles.modeButton} ${searchMode === "add" ? styles.active : ""}`}
+            >
+              Adicionar Jogo
+            </button>
           </div>
         </div>
 
@@ -277,6 +358,73 @@ export default function Page() {
                 {loading ? "Buscando..." : "🔍 Buscar"}
               </button>
             </div>
+          </div>
+        )}
+
+        {searchMode === "add" && (
+          <div className={styles.addGameContainer}>
+            <form onSubmit={handleAddGame} className={styles.addGameForm}>
+              <div className={styles.formGroup}>
+                <label htmlFor="gameName">Nome do Jogo *</label>
+                <input
+                  id="gameName"
+                  type="text"
+                  placeholder="Digite o nome do jogo"
+                  value={newGameForm.name}
+                  onChange={(e) => setNewGameForm(prev => ({ ...prev, name: e.target.value }))}
+                  className={styles.formInput}
+                  disabled={loading}
+                  required
+                />
+              </div>
+              
+              <div className={styles.formGroup}>
+                <label htmlFor="gameGenre">Gêneros</label>
+                <input
+                  id="gameGenre"
+                  type="text"
+                  placeholder="Ex: Action, Adventure, RPG (separados por vírgula)"
+                  value={newGameForm.genre}
+                  onChange={(e) => setNewGameForm(prev => ({ ...prev, genre: e.target.value }))}
+                  className={styles.formInput}
+                  disabled={loading}
+                />
+              </div>
+              
+              <div className={styles.formGroup}>
+                <label htmlFor="gameDevelopers">Desenvolvedores</label>
+                <input
+                  id="gameDevelopers"
+                  type="text"
+                  placeholder="Ex: Naughty Dog, Sony (separados por vírgula)"
+                  value={newGameForm.developers}
+                  onChange={(e) => setNewGameForm(prev => ({ ...prev, developers: e.target.value }))}
+                  className={styles.formInput}
+                  disabled={loading}
+                />
+              </div>
+              
+              <div className={styles.formGroup}>
+                <label htmlFor="gamePublishers">Editoras</label>
+                <input
+                  id="gamePublishers"
+                  type="text"
+                  placeholder="Ex: Sony Interactive Entertainment (separados por vírgula)"
+                  value={newGameForm.publishers}
+                  onChange={(e) => setNewGameForm(prev => ({ ...prev, publishers: e.target.value }))}
+                  className={styles.formInput}
+                  disabled={loading}
+                />
+              </div>
+              
+              <button
+                type="submit"
+                disabled={loading || !newGameForm.name.trim()}
+                className={styles.addGameButton}
+              >
+                {loading ? "Adicionando..." : "➕ Adicionar Jogo"}
+              </button>
+            </form>
           </div>
         )}
 
