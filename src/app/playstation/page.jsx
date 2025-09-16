@@ -130,6 +130,82 @@ function usePlaystationGames({ setPlaystations, setLoading }) {
     }
   }, [setPlaystations, setLoading]);
 
+  const updateGame = useCallback(async (gameId, gameData) => {
+    if (controllerRef.current) controllerRef.current.abort();
+    controllerRef.current = new AbortController();
+    
+    try {
+      setLoading(true);
+      toast.dismiss();
+      toast.info("Atualizando jogo...", { autoClose: 1200 });
+      
+      const res = await axios.put(`https://api.sampleapis.com/playstation/games/${gameId}`, gameData, {
+        signal: controllerRef.current.signal,
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      
+      if (res.data) {
+        // Atualiza o jogo no cache e na lista atual
+        if (cacheRef.current) {
+          cacheRef.current = cacheRef.current.map(game => 
+            game.id === gameId ? { ...game, ...res.data } : game
+          );
+        }
+        setPlaystations(prev => prev.map(game => 
+          game.id === gameId ? { ...game, ...res.data } : game
+        ));
+        setFetchedAt(new Date());
+        toast.success("Jogo atualizado com sucesso! 🎮", { autoClose: 2400 });
+        return res.data;
+      }
+    } catch (err) {
+      if (axios.isCancel(err)) {
+        toast.warning("Operação cancelada", { autoClose: 1500 });
+      } else {
+        console.error(err);
+        toast.error("Erro ao atualizar jogo", { autoClose: 2500 });
+      }
+      throw err;
+    } finally {
+      setLoading(false);
+    }
+  }, [setPlaystations, setLoading]);
+
+  const deleteGame = useCallback(async (gameId) => {
+    if (controllerRef.current) controllerRef.current.abort();
+    controllerRef.current = new AbortController();
+    
+    try {
+      setLoading(true);
+      toast.dismiss();
+      toast.info("Excluindo jogo...", { autoClose: 1200 });
+      
+      await axios.delete(`https://api.sampleapis.com/playstation/games/${gameId}`, {
+        signal: controllerRef.current.signal
+      });
+      
+      // Remove o jogo do cache e da lista atual
+      if (cacheRef.current) {
+        cacheRef.current = cacheRef.current.filter(game => game.id !== gameId);
+      }
+      setPlaystations(prev => prev.filter(game => game.id !== gameId));
+      setFetchedAt(new Date());
+      toast.success("Jogo excluído com sucesso! 🗑️", { autoClose: 2400 });
+    } catch (err) {
+      if (axios.isCancel(err)) {
+        toast.warning("Operação cancelada", { autoClose: 1500 });
+      } else {
+        console.error(err);
+        toast.error("Erro ao excluir jogo", { autoClose: 2500 });
+      }
+      throw err;
+    } finally {
+      setLoading(false);
+    }
+  }, [setPlaystations, setLoading]);
+
   const clear = useCallback(() => {
     setPlaystations([]);
     cacheRef.current = null;
@@ -137,7 +213,7 @@ function usePlaystationGames({ setPlaystations, setLoading }) {
     toast.info("Lista limpa", { autoClose: 1400 });
   }, [setPlaystations]);
 
-  return { fetchGames, fetchGameById, addGame, clear, fetchedAt, hasCache: !!cacheRef.current };
+  return { fetchGames, fetchGameById, addGame, updateGame, deleteGame, clear, fetchedAt, hasCache: !!cacheRef.current };
 }
 
 // Componente Modal
@@ -201,12 +277,140 @@ function GameModal({ game, onClose }) {
   );
 }
 
+// Componente Modal de Edição
+function EditGameModal({ game, onClose, onSave }) {
+  const [formData, setFormData] = useState({
+    name: "",
+    genre: "",
+    developers: "",
+    publishers: ""
+  });
+
+  useEffect(() => {
+    if (game) {
+      setFormData({
+        name: game.name || game.title || "",
+        genre: Array.isArray(game.genre) ? game.genre.join(", ") : (game.genre || ""),
+        developers: Array.isArray(game.developers) ? game.developers.join(", ") : (game.developers || ""),
+        publishers: Array.isArray(game.publishers) ? game.publishers.join(", ") : (game.publishers || "")
+      });
+    }
+  }, [game]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    
+    if (!formData.name.trim()) {
+      toast.warning("Nome do jogo é obrigatório", { autoClose: 1500 });
+      return;
+    }
+
+    const gameData = {
+      name: formData.name.trim(),
+      genre: formData.genre.trim() ? formData.genre.split(',').map(g => g.trim()) : [],
+      developers: formData.developers.trim() ? formData.developers.split(',').map(d => d.trim()) : [],
+      publishers: formData.publishers.trim() ? formData.publishers.split(',').map(p => p.trim()) : []
+    };
+
+    try {
+      await onSave(game.id, gameData);
+      onClose();
+    } catch (err) {
+      // Erro já tratado no hook
+    }
+  };
+
+  if (!game) return null;
+
+  return (
+    <div className={styles.modalOverlay} onClick={onClose}>
+      <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
+        <button className={styles.modalClose} onClick={onClose}>×</button>
+        
+        <div className={styles.modalHeader}>
+          <h2 className={styles.modalTitle}>Editar Jogo</h2>
+        </div>
+
+        <div className={styles.modalBody}>
+          <form onSubmit={handleSubmit} className={styles.editGameForm}>
+            <div className={styles.formGroup}>
+              <label htmlFor="editGameName">Nome do Jogo *</label>
+              <input
+                id="editGameName"
+                type="text"
+                placeholder="Digite o nome do jogo"
+                value={formData.name}
+                onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
+                className={styles.formInput}
+                required
+              />
+            </div>
+            
+            <div className={styles.formGroup}>
+              <label htmlFor="editGameGenre">Gêneros</label>
+              <input
+                id="editGameGenre"
+                type="text"
+                placeholder="Ex: Action, Adventure, RPG (separados por vírgula)"
+                value={formData.genre}
+                onChange={(e) => setFormData(prev => ({ ...prev, genre: e.target.value }))}
+                className={styles.formInput}
+              />
+            </div>
+            
+            <div className={styles.formGroup}>
+              <label htmlFor="editGameDevelopers">Desenvolvedores</label>
+              <input
+                id="editGameDevelopers"
+                type="text"
+                placeholder="Ex: Naughty Dog, Sony (separados por vírgula)"
+                value={formData.developers}
+                onChange={(e) => setFormData(prev => ({ ...prev, developers: e.target.value }))}
+                className={styles.formInput}
+              />
+            </div>
+            
+            <div className={styles.formGroup}>
+              <label htmlFor="editGamePublishers">Editoras</label>
+              <input
+                id="editGamePublishers"
+                type="text"
+                placeholder="Ex: Sony Interactive Entertainment (separados por vírgula)"
+                value={formData.publishers}
+                onChange={(e) => setFormData(prev => ({ ...prev, publishers: e.target.value }))}
+                className={styles.formInput}
+              />
+            </div>
+            
+            <div className={styles.modalActions}>
+              <button
+                type="button"
+                onClick={onClose}
+                className={styles.cancelButton}
+              >
+                Cancelar
+              </button>
+              <button
+                type="submit"
+                className={styles.saveButton}
+              >
+                Salvar Alterações
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function Page() {
   // Estados locais mantidos conforme pedido
   const [playstations, setPlaystations] = useState([]);
   const [loading, setLoading] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedGame, setSelectedGame] = useState(null);
+  const [editingGame, setEditingGame] = useState(null);
   const [gameId, setGameId] = useState("");
   const [searchMode, setSearchMode] = useState("all"); // "all", "id" ou "add"
   const [newGameForm, setNewGameForm] = useState({
@@ -216,7 +420,7 @@ export default function Page() {
     publishers: ""
   });
 
-  const { fetchGames, fetchGameById, addGame, clear, fetchedAt, hasCache } = usePlaystationGames({
+  const { fetchGames, fetchGameById, addGame, updateGame, deleteGame, clear, fetchedAt, hasCache } = usePlaystationGames({
     setPlaystations,
     setLoading
   });
@@ -257,6 +461,12 @@ export default function Page() {
       });
     } catch (err) {
       // Erro já tratado no hook
+    }
+  };
+
+  const handleDeleteGame = async (gameId, gameName) => {
+    if (window.confirm(`Tem certeza que deseja excluir "${gameName}"?`)) {
+      await deleteGame(gameId);
     }
   };
 
@@ -470,15 +680,36 @@ export default function Page() {
                   '--animation-delay': `${idx * 80}ms`,
                   '--card-index': idx
                 }}
-                onClick={() => setSelectedGame(playstation)}
               >
                 <div className={styles.cardGlow}></div>
                 <div className={styles.cardContent}>
                   <div className={styles.cardHeader}>
-                    <h2 className={styles.cardTitle}>
+                    <h2 className={styles.cardTitle} onClick={() => setSelectedGame(playstation)}>
                       {playstation.name || playstation.title || "Sem título"}
                     </h2>
-                    <div className={styles.cardNumber}>#{idx + 1}</div>
+                    <div className={styles.cardActions}>
+                      <div className={styles.cardNumber}>#{idx + 1}</div>
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setEditingGame(playstation);
+                        }}
+                        className={styles.editButton}
+                        title="Editar jogo"
+                      >
+                        ✏️
+                      </button>
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleDeleteGame(playstation.id, playstation.name || playstation.title);
+                        }}
+                        className={styles.deleteButton}
+                        title="Excluir jogo"
+                      >
+                        🗑️
+                      </button>
+                    </div>
                   </div>
 
                   {genres.length > 0 && (
@@ -532,6 +763,12 @@ export default function Page() {
       <GameModal 
         game={selectedGame} 
         onClose={() => setSelectedGame(null)} 
+      />
+      
+      <EditGameModal
+        game={editingGame}
+        onClose={() => setEditingGame(null)}
+        onSave={updateGame}
       />
       
       <ToastContainer position="bottom-right" theme="dark" newestOnTop pauseOnFocusLoss={false} />
