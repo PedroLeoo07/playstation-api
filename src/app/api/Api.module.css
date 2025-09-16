@@ -32,6 +32,11 @@
   background:
   linear-gradient(180deg, rgba(2,6,23,0.85), rgba(7,12,23,0.92)),
   url("/public/images/playstation3-bg.jpg");
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0f1419 0%, #1a1a2e  50%, #16213e 100%);
+  padding: 2rem;
+  position: relative;
+  overflow-x: hidden;
 }
 
 .hero {
@@ -49,6 +54,8 @@
   background:
   linear-gradient(180deg, rgba(2,6,23,0.85), rgba(7,12,23,0.92)),
   url("/images/playstation3-bg.jpg");
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .backgroundEffect {
@@ -62,6 +69,7 @@
     radial-gradient(circle at 80% 80%, rgba(0,198,255,0.15) 0%, transparent 50%);
   animation: glow 4s ease-in-out infinite;
   pointer-events: none;
+  background: radial-gradient(circle at 50% 50%, rgba(0, 112, 255, 0.1) 0%, transparent 70%);
 }
 
 .header {
@@ -69,6 +77,8 @@
   margin-bottom: 24px;
   position: relative;
   z-index: 2;
+  margin-bottom: 3rem;
+  z-index: 1;
 }
 
 .title {
@@ -77,6 +87,9 @@
   margin: 8px 0;
   letter-spacing: -0.8px;
   animation: float 3s ease-in-out infinite;
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+  font-weight: 800;
 }
 
 .titleGlow {
@@ -87,6 +100,12 @@
   color: transparent;
   text-shadow: 0 0 30px rgba(123,97,255,0.8);
   animation: float 3s ease-in-out infinite, glow 2s ease-in-out infinite;
+  background: linear-gradient(45deg, #0070f3, #7928ca, #ff0080);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 0 30px rgba(0, 112, 243, 0.5);
+  animation: pulse 3s ease-in-out infinite alternate;
 }
 
 .description {
@@ -96,6 +115,11 @@
   margin: 12px 0 20px;
   line-height: 1.6;
   text-shadow: 0 2px 10px rgba(0,0,0,0.6);
+  font-size: 1.2rem;
+  color: #b3b3b3;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
 }
 
 .banner {
@@ -114,6 +138,13 @@
   position: relative;
   animation: pulse 4s ease-in-out infinite;
   border: 1px solid rgba(255,255,255,0.2);
+  background: linear-gradient(135deg, rgba(0, 112, 243, 0.2), rgba(121, 40, 202, 0.2));
+  border: 1px solid rgba(0, 112, 243, 0.3);
+  border-radius: 16px;
+  padding: 2rem;
+  margin: 3rem 0;
+  position: relative;
+  backdrop-filter: blur(10px);
 }
 
 .bannerGlow {
@@ -125,6 +156,13 @@
   background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
   animation: glow 3s ease-in-out infinite;
   pointer-events: none;
+  position: absolute;
+  inset: -1px;
+  background: linear-gradient(45deg, #0070f3, #7928ca);
+  border-radius: 16px;
+  z-index: -1;
+  opacity: 0.5;
+  filter: blur(10px);
 }
 
 .bannerContent {
@@ -139,6 +177,9 @@
   letter-spacing: -0.3px;
   color: #ffffff;
   text-shadow: 0 2px 10px rgba(0,0,0,0.4);
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+  color: #ffffff;
 }
 
 .bannerContent p {
@@ -148,6 +189,8 @@
   color: #f8fbff;
   line-height: 1.5;
   text-shadow: 0 1px 5px rgba(0,0,0,0.3);
+  color: #b3b3b3;
+  font-size: 1.1rem;
 }
 
 .apiInfo {
@@ -163,6 +206,12 @@
   transition: all 300ms ease;
   position: relative;
   overflow: hidden;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 2.5rem;
+  margin: 3rem 0;
+  backdrop-filter: blur(10px);
 }
 
 .apiInfo::before {
@@ -194,6 +243,10 @@
   color: #ffffff;
   font-weight: 800;
   text-shadow: 0 2px 10px rgba(123,97,255,0.6);
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: #ffffff;
+  text-align: center;
 }
 
 .apiItem {
@@ -202,6 +255,11 @@
   font-size: 1.05rem;
   line-height: 1.7;
   transition: transform 200ms ease;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  border-left: 3px solid #0070f3;
+  background: rgba(0, 112, 243, 0.05);
+  border-radius: 8px;
 }
 
 .apiItem:hover {
@@ -215,6 +273,10 @@
   font-weight: 800;
   font-size: 1rem;
   text-shadow: 0 1px 5px rgba(0,0,0,0.6);
+  display: block;
+  color: #ffffff;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
 }
 
 .highlightText {
@@ -222,6 +284,9 @@
   font-weight: 700;
   text-shadow: 0 0 10px rgba(123,231,255,0.5);
   animation: glow 2s ease-in-out infinite;
+  color: #0070f3;
+  font-weight: 600;
+  font-size: 1.2rem;
 }
 
 .apiLink {
@@ -231,6 +296,10 @@
   text-shadow: 0 0 10px rgba(123,231,255,0.5);
   transition: all 300ms ease;
   position: relative;
+  color: #0070f3;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
 }
 
 .apiLink::after {
@@ -248,6 +317,8 @@
   color: #bffbff;
   text-shadow: 0 0 15px rgba(123,231,255,0.8);
   transform: translateY(-1px);
+  color: #7928ca;
+  text-shadow: 0 0 10px rgba(0, 112, 243, 0.5);
 }
 
 .apiLink:hover::after {
@@ -265,6 +336,13 @@
   border: 1px solid rgba(123,97,255,0.3);
   box-shadow: 0 4px 15px rgba(0,0,0,0.3);
   transition: all 200ms ease;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  color: #00ff88;
+  border: 1px solid rgba(0, 255, 136, 0.3);
+  font-size: 0.95rem;
 }
 
 .mono:hover {
@@ -276,16 +354,32 @@
   margin: 10px 0 0 22px;
   color: #f0f8ff;
   font-size: 1.05rem;
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0 0 0;
 }
 
 .list li {
   margin-bottom: 8px;
   transition: transform 200ms ease;
+  padding: 0.3rem 0;
+  color: #b3b3b3;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .list li:hover {
   transform: translateX(5px);
   color: #7be7ff;
+}
+
+.list li:last-child {
+  border-bottom: none;
+}
+
+.apiItem p {
+  color: #b3b3b3;
+  line-height: 1.6;
+  margin: 0.5rem 0 0 0;
 }
 
 .features {
@@ -294,6 +388,11 @@
   padding: 20px;
   border-radius: 12px;
   border: 1px solid rgba(123,97,255,0.2);
+  background: linear-gradient(135deg, rgba(121, 40, 202, 0.1), rgba(255, 0, 128, 0.1));
+  border: 1px solid rgba(121, 40, 202, 0.3);
+  border-radius: 16px;
+  padding: 2rem;
+  margin: 3rem 0;
 }
 
 .features h2 {
@@ -302,6 +401,9 @@
   margin-bottom: 12px;
   font-weight: 800;
   text-shadow: 0 2px 10px rgba(123,97,255,0.6);
+  color: #ffffff;
+  margin-bottom: 1.5rem;
+  font-size: 1.8rem;
 }
 
 .features ul {
@@ -315,11 +417,19 @@
   margin-bottom: 8px;
   padding: 8px 0;
   transition: all 200ms ease;
+  padding: 0.8rem 0;
+  color: #b3b3b3;
+  font-size: 1.1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .features li:hover {
   color: #7be7ff;
   transform: translateX(8px);
+}
+
+.features li:last-child {
+  border-bottom: none;
 }
 
 .nextButton {
@@ -343,6 +453,20 @@
   overflow: hidden;
   border: 2px solid rgba(255,255,255,0.3);
   animation: pulse 3s ease-in-out infinite;
+  display: block;
+  margin: 3rem auto 0;
+  padding: 1rem 2.5rem;
+  background: linear-gradient(45deg, #0070f3, #7928ca);
+  border: none;
+  border-radius: 50px;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  min-width: 250px;
 }
 
 .buttonGlow {
@@ -354,12 +478,20 @@
   background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
   animation: glow 2s ease-in-out infinite;
   pointer-events: none;
+  position: absolute;
+  inset: -2px;
+  background: linear-gradient(45deg, #0070f3, #7928ca, #ff0080);
+  border-radius: 50px;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 .buttonText {
   position: relative;
   z-index: 2;
-  text-shadow: 0 2px 10px rgba(0,0,0,0.4);
+  position: relative;
+  z-index: 1;
 }
 
 .nextButton:hover {
@@ -368,21 +500,76 @@
     0 25px 60px rgba(123,97,255,0.5),
     0 0 50px rgba(255,107,107,0.4);
   background-position: 100% 100%;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(0, 112, 243, 0.4);
+}
+
+.nextButton:active {
+  transform: translateY(0);
+}
+
+.nextButton:hover .buttonGlow {
+  opacity: 0.7;
+  animation: rotate 2s linear infinite;
 }
 
 @media (max-width: 800px) {
   .container {
     padding: 20px;
     margin: 12px;
+    padding: 1rem;
   }
   .title {
     font-size: 2.2rem;
+    font-size: 2.5rem;
   }
   .bannerContent h2 {
     font-size: 1.1rem;
+    font-size: 1.5rem;
   }
   .apiInfo {
     padding: 18px;
+    padding: 1.5rem;
+  }
+  .description {
+    font-size: 1rem;
+  }
+  .banner {
+    padding: 1.5rem;
+  }
+  .nextButton {
+    min-width: 200px;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 2rem;
+  }
+  .apiInfoTitle {
+    font-size: 1.5rem;
+  }
+  .bannerContent h2 {
+    font-size: 1.3rem;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    filter: brightness(1);
+  }
+  100% {
+    filter: brightness(1.2);
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }
 
