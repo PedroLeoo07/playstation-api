@@ -139,27 +139,24 @@ function usePlaystationGames({ setPlaystations, setLoading }) {
       toast.dismiss();
       toast.info("Atualizando jogo...", { autoClose: 1200 });
       
-      const res = await axios.put(`https://api.sampleapis.com/playstation/games/${gameId}`, gameData, {
-        signal: controllerRef.current.signal,
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      });
+      // Simula o delay da API
+      await new Promise(resolve => setTimeout(resolve, 1000));
       
-      if (res.data) {
-        // Atualiza o jogo no cache e na lista atual
-        if (cacheRef.current) {
-          cacheRef.current = cacheRef.current.map(game => 
-            game.id === gameId ? { ...game, ...res.data } : game
-          );
-        }
-        setPlaystations(prev => prev.map(game => 
-          game.id === gameId ? { ...game, ...res.data } : game
-        ));
-        setFetchedAt(new Date());
-        toast.success("Jogo atualizado com sucesso! 🎮", { autoClose: 2400 });
-        return res.data;
+      // Como a API sampleapis não suporta PUT real, simulamos a atualização localmente
+      const updatedGame = { ...gameData, id: gameId };
+      
+      // Atualiza o jogo no cache e na lista atual
+      if (cacheRef.current) {
+        cacheRef.current = cacheRef.current.map(game => 
+          game.id === parseInt(gameId) ? { ...game, ...updatedGame } : game
+        );
       }
+      setPlaystations(prev => prev.map(game => 
+        game.id === parseInt(gameId) ? { ...game, ...updatedGame } : game
+      ));
+      setFetchedAt(new Date());
+      toast.success("Jogo atualizado com sucesso! 🎮", { autoClose: 2400 });
+      return updatedGame;
     } catch (err) {
       if (axios.isCancel(err)) {
         toast.warning("Operação cancelada", { autoClose: 1500 });
@@ -182,15 +179,15 @@ function usePlaystationGames({ setPlaystations, setLoading }) {
       toast.dismiss();
       toast.info("Excluindo jogo...", { autoClose: 1200 });
       
-      await axios.delete(`https://api.sampleapis.com/playstation/games/${gameId}`, {
-        signal: controllerRef.current.signal
-      });
+      // Simula o delay da API
+      await new Promise(resolve => setTimeout(resolve, 800));
       
+      // Como a API sampleapis não suporta DELETE real, simulamos a exclusão localmente
       // Remove o jogo do cache e da lista atual
       if (cacheRef.current) {
-        cacheRef.current = cacheRef.current.filter(game => game.id !== gameId);
+        cacheRef.current = cacheRef.current.filter(game => game.id !== parseInt(gameId));
       }
-      setPlaystations(prev => prev.filter(game => game.id !== gameId));
+      setPlaystations(prev => prev.filter(game => game.id !== parseInt(gameId)));
       setFetchedAt(new Date());
       toast.success("Jogo excluído com sucesso! 🗑️", { autoClose: 2400 });
     } catch (err) {
@@ -465,7 +462,7 @@ export default function Page() {
   };
 
   const handleDeleteGame = async (gameId, gameName) => {
-    if (window.confirm(`Tem certeza que deseja excluir "${gameName}"?`)) {
+    if (window.confirm(`Tem certeza que deseja excluir "${gameName}"?\n\nNota: Esta é uma simulação local, pois a API externa não suporta exclusões reais.`)) {
       await deleteGame(gameId);
     }
   };
