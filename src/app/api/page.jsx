@@ -14,10 +14,11 @@ export default function Api() {
       
       <header className={styles.header}>
         <h1 className={styles.title}>
-          <span className={styles.titleGlow}>API da PlayStation</span>
+          <span className={styles.titleGlow}>🎮 API da PlayStation</span>
         </h1>
         <p className={styles.description}>
-          Bem-vindo à API da PlayStation! Aqui você pode acessar informações sobre jogos, consoles e muito mais.
+        Bem-vindo à API da PlayStation!
+        Aqui você encontra informações sobre jogos, consoles e muito mais para integrar em suas aplicações de forma simples e rápida.
         </p>
       </header>
 
@@ -29,27 +30,12 @@ export default function Api() {
         <div className={styles.bannerGlow}></div>
       </div>
 
-    
       <section className={styles.apiInfo}>
         <h2 className={styles.apiInfoTitle}>📊 Informações da API</h2>
 
         <div className={styles.apiItem}>
-          <strong>🔥 Nome da API escolhida:</strong>
-          <div className={styles.highlightText}>RAWG Video Games API</div>
-        </div>
-
-        <div className={styles.apiItem}>
-          <strong>📚 Documentação oficial:</strong>
-          <div>
-            <a
-              href="https://rawg.io/apidocs"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.apiLink}
-            >
-              🌐 https://rawg.io/apidocs
-            </a>
-          </div>
+          <strong>🔥 Nome da API escolhida: RAWG Video Games API</strong>
+          <div className={styles.highlightText}>📚 Documentação oficial: https://rawg.io/apidocs</div>
         </div>
 
         <div className={styles.apiItem}>
@@ -78,14 +64,18 @@ export default function Api() {
         <div className={styles.apiItem}>
           <strong>📝 Descrição breve:</strong>
           <p>
-            A RAWG API fornece dados sobre jogos, lançamentos, imagens e metadados relacionados a
-            videogames. Permite recuperar listas de jogos, detalhes de cada título, imagens de capa,
-            classificações e informações sobre plataformas e gêneros.
+          A RAWG Video Games API fornece dados completos sobre jogos, lançamentos, imagens e metadados relacionados ao universo gamer.
+Com ela, é possível:
+
+Recuperar listas de jogos organizadas por popularidade ou data de lançamento.
+
+Obter detalhes de cada título (nome, data, plataformas, gêneros e avaliações).
+
+Acessar imagens oficiais e classificações da comunidade.
           </p>
         </div>
       </section>
      
-
       <section className={styles.features}>
         <h2>🚀 Recursos</h2>
         <ul>
